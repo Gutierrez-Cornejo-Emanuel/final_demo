@@ -19,6 +19,7 @@ class MinimalPublisher(Node):
         self.initial_heading = -1
         self.current_heading = -1
         self.threshold = 1
+        self.turn_complete = False
     
     def odom_callback(self, msg: Odometry):
         if self.initial_heading == -1:
@@ -27,8 +28,8 @@ class MinimalPublisher(Node):
         print(f"Initial: {self.initial_heading}, Current: {self.current_heading}")
 
     def publish_twist(self):
-        print(f'Total rads turned: {self.rad_turned}')
-        if abs(self.initial_heading - self.current_heading) > self.threshold:
+        #print(f'Total rads turned: {self.rad_turned}')
+        if abs(abs(self.initial_heading - self.current_heading) - 90) > self.threshold:
             msg = Twist()
             self.rad_turned += self.turning_speed * self.timer_period
             msg.angular.z = self.turning_speed
