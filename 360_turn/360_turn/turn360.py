@@ -4,13 +4,13 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 import math
-
+from rclpy.qos import qos_profile_sensor_data
 class MinimalPublisher(Node):
 
     def __init__(self):
         super().__init__('minimal_publisher')
         self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
-        self.subscriber = self.create_subscription(Odometry, '/odom', self.odom_callback ,10)
+        self.subscriber = self.create_subscription(Odometry, '/odom', self.odom_callback ,qos_profile_sensor_data)
         self.timer_period = 0.1  # seconds
         self.timer = self.create_timer(self.timer_period, self.publish_twist)
         self.turning_speed = 0.1
