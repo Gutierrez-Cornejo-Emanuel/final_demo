@@ -4,7 +4,7 @@ from rclpy.node import Node
 from std_msgs.msg import Float64
 from alpha_delta.msg import AlphaDelta
 
-class MinimalPublisher(Node):
+class ArucoAligner(Node):
 
     def __init__(self):
         super().__init__('aruco_aligner')
@@ -34,7 +34,7 @@ class MinimalPublisher(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    minimal_publisher = MinimalPublisher()
+    minimal_publisher = ArucoAligner()
 
     rclpy.spin(minimal_publisher)
 
