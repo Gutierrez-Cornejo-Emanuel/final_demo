@@ -11,6 +11,7 @@ class MinimalPublisher(Node):
     def __init__(self):
         super().__init__('minimal_publisher')
         self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.tc_publisher_ = self.create_publisher(Float64, '/turn_complete', 10)
         self.subscriber = self.create_subscription(Odometry, '/odom', self.odom_callback ,qos_profile_sensor_data)
         self.degree_listener = self.create_subscription(Float64, "/turn", self.turn_callback, 10)
         self.timer_period = 0.1  # seconds
@@ -41,7 +42,9 @@ class MinimalPublisher(Node):
         else:
             self.enabled_odom = False
             self.previous_heading = -1
-
+            msg = Float64()
+            msg.data = self.degs_to_turn
+            self.tc_publisher_.publish(msg)
             self.timer.destroy()
     def turn_callback(self, msg: Float64):
         self.degs_to_turn = msg.data

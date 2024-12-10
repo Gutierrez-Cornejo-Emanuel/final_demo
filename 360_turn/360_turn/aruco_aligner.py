@@ -9,12 +9,12 @@ class ArucoAligner(Node):
     def __init__(self):
         super().__init__('aruco_aligner')
         self.publisher = self.create_publisher(Float64, '/turn', 10)
+        self.turn_complete_sub = self.create_subscription(Float64, '/turn_complete',self.on_turn_complete ,10)
         self.subscriber = self.create_subscription(AlphaDelta, '/aruco_pose',self.alpha_delta_callback ,10)
         self.timer_period = 0.5  # seconds
         self.timer = self.create_timer(self.timer_period, self.turn360)
         self.turning = False
         self.alpha_deltas = {}
-        self.turn360()
     def turn360(self):
         msg = Float64()
         msg.data = 360.0
@@ -27,6 +27,10 @@ class ArucoAligner(Node):
             elif self.alpha_deltas[msg.id].alpha > msg.alpha:
                 self.alpha_deltas[msg.id] = msg
         print(self.alpha_deltas)
+    def on_turn_complete(self, msg: Float64):
+        if msg.data == 360:
+            print(self.alpha_deltas)
+
         
 
 
