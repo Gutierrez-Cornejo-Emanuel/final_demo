@@ -9,7 +9,7 @@ class MinimalPublisher(Node):
     def __init__(self):
         super().__init__('aruco_aligner')
         self.publisher_ = self.create_publisher(Float64, '/turn', 10)
-        self.publisher_ = self.create_subscription(AlphaDelta, '/aruco_pose',self.alpha_delta_callback ,10)
+        self.subscriber = self.create_subscription(AlphaDelta, '/aruco_pose',self.alpha_delta_callback ,10)
         self.timer_period = 0.5  # seconds
         self.turning = False
         self.alpha_deltas = {}
