@@ -6,7 +6,6 @@ from nav_msgs.msg import Odometry
 from std_msgs.msg import Float64
 import math
 from rclpy.qos import qos_profile_sensor_data
-import heapq
 class MinimalPublisher(Node):
 
     def __init__(self):

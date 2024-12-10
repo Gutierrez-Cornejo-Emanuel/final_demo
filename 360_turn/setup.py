@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'turn = 360_turn.turn360:main',
+            'aligner = 360_turn.aruco_aligner:main',
         ],
     },
 )
