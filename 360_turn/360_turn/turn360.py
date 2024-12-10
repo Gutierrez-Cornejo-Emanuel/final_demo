@@ -46,6 +46,7 @@ class MinimalPublisher(Node):
             self.timer.destroy()
     def turn_callback(self, msg: Float64):
         self.degs_to_turn = msg.data
+        self.deg_turned = 0
         self.enabled_odom = True
         self.timer = self.create_timer(self.timer_period, self.publish_twist)
 
