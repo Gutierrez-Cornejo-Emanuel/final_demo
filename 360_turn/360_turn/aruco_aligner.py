@@ -17,7 +17,7 @@ class MinimalPublisher(Node):
     def turn360(self):
         msg = Float64()
         msg.data = 360.0
-        self.publisher_.publish()
+        self.publisher_.publish(msg)
     def alpha_delta_callback(self, msg: AlphaDelta):
         if msg.id in [10, 20, 30, 1]:
             if msg.id not in self.alpha_deltas:
