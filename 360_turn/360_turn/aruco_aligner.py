@@ -16,7 +16,7 @@ class ArucoAligner(Node):
 
         self.turn_complete_sub = self.create_subscription(Float64, '/turn_complete',self.on_turn_complete ,10)
         self.subscriber = self.create_subscription(AlphaDelta, '/aruco_pose',self.alpha_delta_callback ,10)
-        self.odom_subscriber = self.create_subscription(Odometry, '/odom', self.odom_callback)
+        self.odom_subscriber = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
         self.timer_period = 0.5  # seconds
         self.timer = self.create_timer(self.timer_period, self.turn360)
         self.turning = False
