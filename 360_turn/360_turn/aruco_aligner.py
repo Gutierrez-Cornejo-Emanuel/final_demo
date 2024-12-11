@@ -24,7 +24,7 @@ class ArucoAligner(Node):
         if msg.id in [10, 20, 30, 1]:
             if msg.id not in self.alpha_deltas:
                 self.alpha_deltas[msg.id] = msg
-            elif self.alpha_deltas[msg.id].alpha > msg.alpha:
+            elif abs(self.alpha_deltas[msg.id].alpha) > abs(msg.alpha):
                 self.alpha_deltas[msg.id] = msg
         print(self.alpha_deltas)
     def on_turn_complete(self, msg: Float64):
